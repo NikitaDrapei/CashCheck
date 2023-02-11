@@ -1,8 +1,10 @@
-package by.lnik;
+package by.lnik.classes;
 
 public class card {
     private int number;
     private double discount;
+
+    //Конструкторы
     public card() {
     }
 
@@ -10,7 +12,9 @@ public class card {
         this.number = number;
         this.discount = discount;
     }
+    ///
 
+    //Gets and Setters
     public int getNumber() {
         return number;
     }
@@ -23,10 +27,10 @@ public class card {
         return discount;
     }
 
-
     public void setDiscount(int discount) {
         this.discount = discount;
     }
+    ///
 
     @Override
     public String toString() {

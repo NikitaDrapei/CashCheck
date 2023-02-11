@@ -1,16 +1,14 @@
-package by.lnik;
+package by.lnik.classes;
 
 public class product {
     private int id;
     private double price;
     private String name;
     private boolean isDiscount;
-
-    private int howMuchForDiscount = 5;//оптовое количество
-
+    private final int howMuchForDiscount = 5;//оптовое количество
     private double howMuchDiscount = 10;//Задаем процент скидки, для оптового количества
 
-
+    //Конструкторы
     public product() {
     }
 
@@ -20,7 +18,9 @@ public class product {
         this.name = name;
         this.isDiscount = isDiscount;
     }
+    ///
 
+    //Gets and Setters
     public int getId() {
         return id;
     }
@@ -56,6 +56,7 @@ public class product {
     public double getHowMuchDiscount() {
         return howMuchDiscount;
     }
+    ///
 
     @Override
     public String toString() {
@@ -64,7 +65,6 @@ public class product {
                 ", price=" + price +
                 ", name='" + name + '\'' +
                 ", isDiscount=" + isDiscount +
-                ", howMuchForDiscount=" + howMuchForDiscount +
                 '}';
     }
 }

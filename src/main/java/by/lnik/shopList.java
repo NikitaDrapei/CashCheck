@@ -1,13 +1,18 @@
 package by.lnik;
 
+import by.lnik.classes.card;
+import by.lnik.classes.product;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class shopList extends checkerArgs {
+    //
     private int quantity;
     private String fullPriceofProduct;
-
-    public shopList() {//конструкторы
+    ///
+    //конструкторы
+    public shopList() {
     }
 
     public shopList(int id, double price, String name, boolean isDiscount, int quantity, String fullPriceofProduct) {
@@ -15,19 +20,22 @@ public class shopList extends checkerArgs {
         this.quantity = quantity;
         this.fullPriceofProduct = fullPriceofProduct;
     }
+    ///
 
     public String getFullPriceofProduct() {
         return fullPriceofProduct;
     }
 
+    //Хранилище списка покупок
     private static List<shopList> shopLists;
 
-
-    static {//builder база продуктов
+    static {
         shopLists = new ArrayList<>();
     }
+    ///
 
-    public static void addProduct(String[] part, product prd) {//Добавление продукта в shopList, с изменением id, + проверкой на скидку по опту
+    //Добавление продукта в shopList, + проверкой на скидку по опту
+    public static void addProduct(String[] part, product prd) {
         int id = 0;//Проверка id в списке продуктов
         int quantity = Integer.parseInt(part[1]);
         for (shopList shpl : shopLists) {
@@ -37,16 +45,19 @@ public class shopList extends checkerArgs {
         shopLists.add(new shopList(id, prd.getPrice(), prd.getName(), prd.getIsDiscount(),//добавление продукта в список покупок
                 quantity, fullPriceofProduct(quantity, prd)));
     }
+    ///
 
+    //Проверка явл. ли товар дисконтным, true - возвращает товар со скидкой String, false - без скидки
     private static String fullPriceofProduct(int quantity, product prd) {//получение полной цены для определенной позиции, в зависимости от опта
         if (prd.getIsDiscount() && quantity > prd.getHowMuchForDiscount()) {
-            return (prd.getPrice() * quantity) * ((100 - prd.getHowMuchDiscount()) / 100) + " is a " + prd.getHowMuchDiscount() + " % discount for opt";
+            return (prd.getPrice() * quantity) * ((100 - prd.getHowMuchDiscount()) / 100) + " - " + prd.getHowMuchDiscount() + " %% discount for opt";
         } else {
             return (prd.getPrice() * quantity) + "";
         }
     }
+    ///
 
-
+    //Возвращает полную стоимость(с учетом скидок по опту, String)
     public static double getFullPrice() {
         double fullPrice = 0.0;
         for (shopList shpl : shopLists) {
@@ -54,32 +65,30 @@ public class shopList extends checkerArgs {
         }
         return fullPrice;
     }
-
-    public static double getFullPriceWithDiscount(card promotionalCard) {
-        double fullPrice = getFullPrice();
-        return (fullPrice * ((100 - promotionalCard.getDiscount()) / 100));
-
-    }
-
-
     public static double priceStringToDouble(String price) {
         String[] prices = price.split("\\ ");
         return Double.parseDouble(prices[0]);
     }
+    ///
 
+    //Возвращает полную стоимость(с учетом скидки опту + карточка)
+    public static double getFullPriceWithDiscount(card promotionalCard) {
+        double fullPrice = getFullPrice();
+        return (fullPrice * ((100 - promotionalCard.getDiscount()) / 100));
+    }
+    ///
 
-    public List<shopList> returnShopL() {
+    //Возврат списка покупок
+    public static List<shopList> returnShopL() {
         return shopLists;
     }
+    ///
 
-    public void clearList() {
-        shopLists.clear();
-    }
-
+    //Вывод данных, форматированный
     @Override
     public String toString() {
         return
-                quantity + " " + this.getName() + " " + this.getPrice() + " " + fullPriceofProduct;
-
+                String.format("%-12d%-23s%-16.2f%s", quantity,this.getName(), this.getPrice(), fullPriceofProduct);
     }
+    ///
 }
