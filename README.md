@@ -9,7 +9,7 @@ If you need to make a cash receipt, for your shop, you can use this variant.
 To deploy this project run
 
 ```bash
-   java CheckRunner itemId-quantity card-NumberofCard
+   java CheckRunner itemId-quantity card-NumberOfCard
 
 ```
 
