@@ -22,7 +22,7 @@ public class cardsStorage extends card {
     ///
 
     //Проверка наличия карточки, true - возвращает карточку, false - null
-    public card isCardExist(int number) {
+    public static card isCardExist(int number) {
         for (card crd : cards) {
             if (crd.getNumber() == number) {
                 return crd;

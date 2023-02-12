@@ -9,8 +9,7 @@ import static by.lnik.shopList.addProduct;
 
 public class checkerArgs extends productsStorage {
     //
-    private cardsStorage crdS = new cardsStorage();
-    private String[] Cardpart;
+    private String[] cardPart;
     ///
     //Конструкторы
     public checkerArgs() {
@@ -31,21 +30,21 @@ public class checkerArgs extends productsStorage {
             if (part[0].equals("card")) {//Это карта?
                 if (checkCard(part) != null) {//Она существует?
                     isCard = true;
-                    Cardpart = part;
+                    cardPart = part;
                 }
             } else {//Это продукт
                 checkProduct(part);
             }
         }
-        return (isCard) ? checkCard(Cardpart) : null;//Карта была и она настоящая? true - отдаем карту, false - null
+        return (isCard) ? checkCard(cardPart) : null;//Карта была и она настоящая? true - отдаем карту, false - null
     }
     ///
 
     //Проверка карты, она есть? true - отдаем карту обратно, false - null
-    private card checkCard(String[] part) {
+    public card checkCard(String[] part) {
         int number = Integer.parseInt(part[1]);
-        if (crdS.isCardExist(number) != null) {
-            return crdS.isCardExist(number);
+        if (cardsStorage.isCardExist(number) != null) {
+            return cardsStorage.isCardExist(number);
         } else {
             System.out.println("Card with number " + number + " not exist");
             return null;
@@ -54,13 +53,15 @@ public class checkerArgs extends productsStorage {
     ///
 
     //Проверка продукта, он есть? true - добавляем его в список покупок, false - указываем что его нет
-    private void checkProduct(String[] part) {
+    public boolean checkProduct(String[] part) {
         int id = Integer.parseInt(part[0]);
         if (isProductExist(id) != null) {//Продукт существует?
             product prd = (isProductExist(id));//Добавляемый продукт
             addProduct(part, prd);//Добавляем продукт в список покупок
+            return true;
         } else {
             System.out.println("Product with index " + id + " not exist");
+            return false;
         }
     }
 }

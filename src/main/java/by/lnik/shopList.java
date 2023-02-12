@@ -21,10 +21,15 @@ public class shopList extends checkerArgs {
         this.fullPriceofProduct = fullPriceofProduct;
     }
     ///
-
+    //Возвращает стоимость 1 товара(с учетом скидки по опту если имеется)
+    //Getters
     public String getFullPriceofProduct() {
         return fullPriceofProduct;
     }
+    public int getQuantity() {
+        return quantity;
+    }
+    ///
 
     //Хранилище списка покупок
     private static List<shopList> shopLists;
@@ -43,12 +48,12 @@ public class shopList extends checkerArgs {
         }
         id++;
         shopLists.add(new shopList(id, prd.getPrice(), prd.getName(), prd.getIsDiscount(),//добавление продукта в список покупок
-                quantity, fullPriceofProduct(quantity, prd)));
+                quantity, priceToQuantityDiscount(quantity, prd)));
     }
     ///
 
     //Проверка явл. ли товар дисконтным, true - возвращает товар со скидкой String, false - без скидки
-    private static String fullPriceofProduct(int quantity, product prd) {//получение полной цены для определенной позиции, в зависимости от опта
+    private static String priceToQuantityDiscount(int quantity, product prd) {//получение полной цены для определенной позиции, в зависимости от опта
         if (prd.getIsDiscount() && quantity > prd.getHowMuchForDiscount()) {
             return (prd.getPrice() * quantity) * ((100 - prd.getHowMuchDiscount()) / 100) + " - " + prd.getHowMuchDiscount() + " %% discount for opt";
         } else {
@@ -58,7 +63,7 @@ public class shopList extends checkerArgs {
     ///
 
     //Возвращает полную стоимость(с учетом скидок по опту, String)
-    public static double getFullPrice() {
+    public static double PriceForAllProducts() {
         double fullPrice = 0.0;
         for (shopList shpl : shopLists) {
             fullPrice += priceStringToDouble(shpl.getFullPriceofProduct());
@@ -72,8 +77,8 @@ public class shopList extends checkerArgs {
     ///
 
     //Возвращает полную стоимость(с учетом скидки опту + карточка)
-    public static double getFullPriceWithDiscount(card promotionalCard) {
-        double fullPrice = getFullPrice();
+    public static double FullPriceWithDiscount(card promotionalCard) {
+        double fullPrice = PriceForAllProducts();
         return (fullPrice * ((100 - promotionalCard.getDiscount()) / 100));
     }
     ///

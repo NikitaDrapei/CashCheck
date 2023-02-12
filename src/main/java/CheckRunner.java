@@ -45,11 +45,12 @@ public class CheckRunner {
                 System.out.println("1. Output cash receipt to a file");
                 System.out.println("2. Output cards storage");
                 System.out.println("3. Output products storage");
+                System.out.println("4. Exit");
                 do {///Проверка на выбор меню
-                    System.out.println("Choose between 1 to 3:");
+                    System.out.println("Choose between 1 to 4:");
                     menu = sc.nextInt();
-                    if (menu <= 0 || menu > 3) {
-                        System.out.println("Input correct number between 1 to 3");
+                    if (menu <= 0 || menu > 4) {
+                        System.out.println("Input correct number between 1 to 4");
                     } else {
                         fExit1 = false;
                     }
@@ -77,6 +78,10 @@ public class CheckRunner {
                         for (product products : productsStorage.returnProductList()) {
                             System.out.println(products.toString());
                         }
+                        break;
+                    case 4://Выход
+                        sc.close();
+                        fExit = false;
                         break;
                 }
             } while (fExit);

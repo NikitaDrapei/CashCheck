@@ -16,6 +16,7 @@ public class cashReceiptBuilder {
         double fullPrice = 0;
         System.out.println("\n------------------------------------------------------------------------------------");
         System.out.println("CASH RECEIPT");
+        System.out.println(nameOfcompany);
         System.out.println(currentDate);
         System.out.println("************************************************************************************");
         System.out.println("QTY         DESCRIPTION            PRICE           TOTAL");
@@ -25,11 +26,11 @@ public class cashReceiptBuilder {
         }
 
         System.out.println("************************************************************************************");
-        fullPrice = shopList.getFullPrice();
+        fullPrice = shopList.PriceForAllProducts();
         System.out.println("Price of product: " + fullPrice);
         if (promotionalCard != null) {
             System.out.println("Your card number " + promotionalCard.getNumber() + " your discount is: " + promotionalCard.getDiscount() + " %" +
-                    "\nFinal price: " + shopList.getFullPriceWithDiscount(promotionalCard));
+                    "\nFinal price: " + shopList.FullPriceWithDiscount(promotionalCard));
         } else {
             System.out.println("Final price: " + fullPrice);
         }
@@ -52,11 +53,11 @@ public class cashReceiptBuilder {
         }
 
         pw.println("************************************************************************************");
-        fullPrice = shopList.getFullPrice();
+        fullPrice = shopList.PriceForAllProducts();
         pw.println("Price of product: " + fullPrice);
         if (promotionalCard != null) {
             pw.println("Your card number " + promotionalCard.getNumber() + " your discount is: " + promotionalCard.getDiscount() + " %" +
-                    "\nFinal price: " + shopList.getFullPriceWithDiscount(promotionalCard));
+                    "\nFinal price: " + shopList.FullPriceWithDiscount(promotionalCard));
         } else {
             pw.println("Final price: " + fullPrice);
         }
